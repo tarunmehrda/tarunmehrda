@@ -33,29 +33,43 @@
 
 ## ⚡ `whoami`
 
-```python
-class Tarun:
-    def __init__(self):
-        self.role        = "AI/ML Engineer & Data Scientist"
-        self.location    = "Pilani, Rajasthan 🇮🇳"
-        self.education   = "B.Tech, Computer Science"
-        self.coffee      = float("inf")
+# .github/workflows/snake.yml
+# Generates the contribution-snake animation used in the profile README.
+# Runs every day + on every push to main, and can be triggered manually.
 
-    def stack(self):
-        return {
-            "ML"  : ["Deep Learning", "Neural Nets", "Ensembles", "AutoML"],
-            "NLP" : ["Transformers", "LLMs", "RAG", "Fine-tuning"],
-            "CV"  : ["CNNs", "Object Detection", "Segmentation"],
-            "DS"  : ["Stats Modeling", "EDA", "Feature Eng", "A/B Testing"],
-        }
+name: Generate Snake
 
-    def mission(self):
-        return "Build intelligent systems that solve real problems. 🚀"
+on:
+  schedule:
+    - cron: "0 0 * * *"   # daily at 00:00 UTC
+  workflow_dispatch:        # lets you run it manually from the Actions tab
+  push:
+    branches:
+      - main
 
+permissions:
+  contents: write
 
-print(Tarun().mission())
-# >>> Build intelligent systems that solve real problems. 🚀
-```
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Generate snake SVGs
+        uses: Platane/snk@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/snake.svg
+            dist/snake-dark.svg?palette=github-dark&color_snake=#00C7B7
+
+      - name: Push to output branch
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 <table>
 <tr>
