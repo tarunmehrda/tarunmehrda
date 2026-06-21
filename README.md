@@ -1,6 +1,6 @@
 <!--
 ╔══════════════════════════════════════════════════════════════════════╗
-║   TARUN MEHARDA · GitHub Profile README  (v2 — reliable images)      ║
+║   TARUN KUMAR MEHARDA · GitHub Profile README                        ║
 ║   Palette: violet #7C3AED → cyan #06B6D4 · Theme: radical            ║
 ║                                                                      ║
 ║   IMAGE NOTES (read me):                                             ║
